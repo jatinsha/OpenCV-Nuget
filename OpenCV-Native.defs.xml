@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="clr-namespace:Microsoft.Build.Framework.XamlTypes;assembly=Microsoft.Build.Framework">
+	<Rule Name="ReferencedPackages-opencv" PageTemplate="tool" DisplayName="Referenced Packages" SwitchPrefix="/" Order="1">
+		<Rule.Categories>
+			<Category Name="opencv" DisplayName="OpenCV-Native" />
+		</Rule.Categories>
+		<Rule.DataSource>
+			<DataSource Persistence="ProjectFile" ItemType="" />
+		</Rule.DataSource>
+		<EnumProperty Name="OpenCVLinkage" DisplayName="Version Toolset" Description="Select version file folder to link OpenCV" Category="opencv">
+			<EnumValue Name="vc14" DisplayName="vc14" />
+      <EnumValue Name="vc15" DisplayName="vc15" />
+			<EnumValue Name="vc16" DisplayName="vc16" />
+		</EnumProperty>
+		<EnumProperty Name="OPENCV_DIR" Visible="false" Category="opencv">
+			<EnumValue Name="$(MSBuildThisFileDirectory)" />
+		</EnumProperty>
+	</Rule>
+</ProjectSchemaDefinitions>

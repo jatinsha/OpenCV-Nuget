@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  
+	<!-- Variable PYLON_DEV_DIR definition -->
+	<ItemGroup>
+		<PropertyPageSchema Include="$(MSBuildThisFileDirectory)OpenCV-Native.defs.xml" />
+	</ItemGroup>
+  <PropertyGroup Condition="'$(OpenCVLinkage)' != 'vc16' AND '$(OpenCVLinkage)' != 'vc14'">
+    <OpenCVLinkage>vc14</OpenCVLinkage>
+  </PropertyGroup>
+	<PropertyGroup Condition="'$(OPENCV_DIR)' != '$(MSBuildThisFileDirectory)'">
+		<OPENCV_DIR>$(MSBuildThisFileDirectory)</OPENCV_DIR>
+	</PropertyGroup>
+
+</Project>

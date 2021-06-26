@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="OpenCV_Native_CheckPrerequisites" BeforeTargets="BeforeBuild">
+    <Error Condition="'$(Platform)' != 'x64' OR '$(Platform)' != 'x86'"
+           Text="OpenCV-Native only supports the x64 and x86 platforms at this time."/>
+  </Target>
+
+	<PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+		<ConfigurationType>Release</ConfigurationType>
+		<Mode></Mode>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <ConfigurationType>Debug</ConfigurationType>
+		<Mode>d</Mode>
+	</PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)' == 'x64'">
+    <LibraryExt>_64</LibraryExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)' == 'x86'">
+    <LibraryExt></LibraryExt>
+  </PropertyGroup>
+  
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\..\runtimes\native\$(Platform)-$(ConfigurationType)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ClCompile>
+
+		<Link>
+			<AdditionalDependencies>$(MSBuildThisFileDirectory)..\..\runtimes\native\$(Platform)-$(ConfigurationType)\$(Platform)\$(OpenCVLinkage)\lib\opencv_world452$(Mode).lib;%(AdditionalDependencies)</AdditionalDependencies>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemGroup>
+		<Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\native\$(Platform)-$(ConfigurationType)\$(Platform)\$(OpenCVLinkage)\bin\opencv_world452$(Mode).dll">
+			<Link>opencv_world452$(Mode).dll</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Visible>False</Visible>
+		</Content>
+    <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\native\$(Platform)-$(ConfigurationType)\$(Platform)\$(OpenCVLinkage)\bin\opencv_videoio_ffmpeg452$(LibraryExt).dll">
+      <Link>opencv_videoio_ffmpeg452$(LibraryExt).dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+	</ItemGroup>
+
+</Project>
